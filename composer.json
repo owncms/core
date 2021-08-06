@@ -1,0 +1,38 @@
+{
+    "name": "dcms/core",
+    "description": "The Core of the system",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Damian Bialkowski",
+            "email": "damianbialkowski8@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Core\\Providers\\CoreServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "require": {
+        "cviebrock/eloquent-sluggable": "^8.0",
+        "facuz/laravel-themes": "^3.2",
+        "kalnoy/nestedset": "^5.0",
+        "silber/bouncer": "dev-master",
+        "laravelcollective/html": "^6.2",
+        "spatie/laravel-translatable": "^4.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Core\\": "",
+            "src\\FormBuilder\\": "src\\FormBuilder\\"
+        },
+        "files": [
+            "src/FormBuilder/Helpers/helpers.php"
+        ]
+    }
+}

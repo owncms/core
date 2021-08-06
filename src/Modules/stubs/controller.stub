@@ -1,0 +1,19 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Modules\$MODULE$\Http\Controllers\CoreController;
+use Illuminate\Http\Request;
+
+class $CLASS$ extends CoreController
+{
+    public function __construct()
+    {
+        $this->model = '';
+        $this->form = '';
+        $this->baseView = 'panel.base_view';
+        $this->baseRoute = 'base_route';
+        $this->request = Request::class;
+        parent::__construct();
+    }
+}
