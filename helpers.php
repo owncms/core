@@ -72,7 +72,7 @@ if (!function_exists('is_module_enabled')) {
 }
 
 if (!function_exists('getGuardName')) {
-    function getGuardName(): mixed
+    function getGuardName(): string|int|null
     {
         foreach (array_keys(config('auth.guards')) as $guard) {
             if (auth()->guard($guard)->check()) {
