@@ -14,7 +14,6 @@
                 "Modules\\Core\\Providers\\CoreServiceProvider"
             ],
             "aliases": {
-
             }
         }
     },
@@ -34,5 +33,7 @@
         "files": [
             "src/FormBuilder/Helpers/helpers.php"
         ]
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
