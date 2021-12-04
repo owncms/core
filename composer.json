@@ -34,12 +34,6 @@
             "src/FormBuilder/Helpers/helpers.php"
         ]
     },
-    "repositories": [
-        {
-            "url": "https://github.com/owncms/core.git",
-            "type": "git"
-        }
-    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
