@@ -1,6 +1,7 @@
 {
     "name": "owncms/core",
     "description": "The Core of the system",
+    "type": "owncms-module",
     "license": "MIT",
     "authors": [
         {
@@ -33,7 +34,5 @@
         "files": [
             "src/FormBuilder/Helpers/helpers.php"
         ]
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
