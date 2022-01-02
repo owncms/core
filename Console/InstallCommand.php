@@ -43,7 +43,7 @@ class InstallCommand extends Command
         foreach ($modules as $module) {
             $class = 'Modules\\' . $module['module'] . '\\Module';
             if (class_exists($class) && method_exists($class, 'install')) {
-                (new $class)->install();
+                (new $class($module))->install();
             }
         }
     }
@@ -55,9 +55,7 @@ class InstallCommand extends Command
      */
     protected function getArguments()
     {
-        return [
-            ['example', InputArgument::REQUIRED, 'An example argument.'],
-        ];
+        return [];
     }
 
     /**
@@ -67,8 +65,6 @@ class InstallCommand extends Command
      */
     protected function getOptions()
     {
-        return [
-            ['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
-        ];
+        return [];
     }
 }

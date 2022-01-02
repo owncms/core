@@ -16,7 +16,11 @@ use Modules\Admin\Traits\FormController;
 
 abstract class CoreController extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, FormBuilderTrait, FormController;
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use ValidatesRequests;
+    use FormBuilderTrait;
+    use FormController;
 
     protected string $model;
     protected string $defaultRedirect = 'index';

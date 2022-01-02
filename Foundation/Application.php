@@ -13,6 +13,7 @@ class Application
 {
     protected object $app;
     protected $request;
+    private $prefixAdmin;
     const VERSION = 0.1;
     const AUTHOR = 'Damian Białkowski';
 
@@ -22,22 +23,23 @@ class Application
      */
     public function __construct(
         BaseApplication $app
-    )
-    {
+    ) {
         $this->app = $app;
         $this->request = $app->request;
+        $this->prefixAdmin = env('ADMIN_ROUTE', 'admin');
         $this->initBase();
     }
 
     public function initBase(): void
     {
-        Config::set('core.route_status', $this->getRouteStatus());
+        Config::set('core.route_type', $this->getRouteType());
+        Config::set('core.prefix_admin', $this->getPrefixAdmin());
     }
 
     /**
      * @return string
      */
-    public function getRouteStatus(): string
+    public function getRouteType(): string
     {
         if ($this->isBackend() || app()->runningInConsole()) {
             return 'backend';
@@ -50,7 +52,7 @@ class Application
      */
     public function isBackend(): bool
     {
-        return Str::contains($this->request->url(), env('ADMIN_ROUTE', 'admin'));
+        return Str::contains($this->request->url(), $this->prefixAdmin);
     }
 
     /**
@@ -126,5 +128,10 @@ class Application
     public static function getAuthor(): string
     {
         return self::AUTHOR;
+    }
+
+    public function getPrefixAdmin(): string
+    {
+        return $this->prefixAdmin;
     }
 }

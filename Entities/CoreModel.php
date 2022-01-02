@@ -10,5 +10,4 @@ class CoreModel extends Model
     {
         return array_key_exists($attribute, $this->attributes);
     }
-
 }

@@ -14,9 +14,11 @@ if (!function_exists('modules')) {
  * URL to specific module assets
  */
 if (!function_exists('module_asset')) {
-    function module_asset($path): string
+    function module_asset($path, $prefix = false): string
     {
-        $prefix = module_prefix();
+        if (!$prefix) {
+            $prefix = module_prefix();
+        }
         return asset("modules/$prefix/$path");
     }
 }

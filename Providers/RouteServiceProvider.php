@@ -3,9 +3,9 @@
 namespace Modules\Core\Providers;
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Modules\Core\Providers\Base\RouteServiceProvider as BaseRouteServiceProvider;
 
-class RouteServiceProvider extends ServiceProvider
+class RouteServiceProvider extends BaseRouteServiceProvider
 {
     /**
      * The module namespace to assume when generating URLs to actions.
@@ -13,18 +13,8 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected string $moduleNamespace = 'Modules\Core\Http\Controllers';
-
-    /**
-     * Called before routes are registered.
-     *
-     * Register any model bindings or pattern based filters.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        parent::boot();
-    }
+    protected string $moduleName = 'Core';
+    protected string $moduleNameLower = 'core';
 
     /**
      * Define the routes for the application.
@@ -47,7 +37,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('Core', '/Routes/web.php'));
+            ->group(module_path($this->moduleName, '/Routes/web.php'));
     }
 
 }
