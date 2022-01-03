@@ -1,11 +1,12 @@
 {
     "name": "owncms/core",
     "description": "The Core of the system",
+    "type": "owncms-module",
     "license": "MIT",
     "authors": [
         {
             "name": "Damian Bialkowski",
-            "email": "damianbialkowski8@gmail.com"
+            "email": "damianbialkowski.info@gmail.com"
         }
     ],
     "extra": {
@@ -33,7 +34,5 @@
         "files": [
             "src/FormBuilder/Helpers/helpers.php"
         ]
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
