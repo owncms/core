@@ -67,7 +67,7 @@ class RouteServiceProvider extends BaseRouteServiceProvider
         if (file_exists($path)) {
             Route::as('Front::' . $this->moduleNameLower . '.')
                 ->middleware('front')
-                ->namespace($this->moduleNamespace)
+//                ->namespace($this->moduleNamespace)
                 ->group($path);
         }
     }
