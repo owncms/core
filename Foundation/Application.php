@@ -60,7 +60,7 @@ class Application
      */
     public function isFrontend(): bool
     {
-        return !$this->isBackend();
+        return !$this->isBackend() && !app()->runningInConsole();
     }
 
     /**
