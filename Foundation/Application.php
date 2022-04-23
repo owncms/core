@@ -34,6 +34,7 @@ class Application
     {
         Config::set('core.route_type', $this->getRouteType());
         Config::set('core.prefix_admin', $this->getPrefixAdmin());
+        Config::set('system.is_frontend', $this->isFrontend());
     }
 
     /**

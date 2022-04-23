@@ -20,6 +20,7 @@ class ModuleServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
 
+        $this->registerObservers();
         $this->application = resolve('application');
     }
 
@@ -96,6 +97,20 @@ class ModuleServiceProvider extends ServiceProvider
     public function getApplication()
     {
         return $this->application;
+    }
+
+    /**
+     * @return void
+     */
+    public function registerObservers()
+    {
+        $observers = config($this->moduleNameLower . '.observers');
+        if (!$observers) {
+            return;
+        }
+        foreach ($observers as $model => $observerClass) {
+            $model::observe($observerClass);
+        }
     }
 
     /**

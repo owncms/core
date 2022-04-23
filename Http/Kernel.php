@@ -85,4 +85,21 @@ class Kernel extends HttpKernel
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
     ];
+
+    /**
+     * Get the route dispatcher callback.
+     *
+     * @return \Closure
+     */
+    protected function dispatchToRouter()
+    {
+        $this->router = $this->app['router'];
+
+        $this->router->replaceMiddleware(
+            $this->routeMiddleware + $this->router->getMiddleware(),
+            $this->middlewareGroups + $this->router->getMiddlewareGroups()
+        );
+
+        return parent::dispatchToRouter();
+    }
 }
