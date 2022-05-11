@@ -20,8 +20,6 @@
     },
     "require": {
         "cviebrock/eloquent-sluggable": "^8.0",
-        "facuz/laravel-themes": "^3.2",
-        "kalnoy/nestedset": "^5.0",
         "silber/bouncer": "dev-master",
         "laravelcollective/html": "^6.2",
         "spatie/laravel-translatable": "^4.6"
