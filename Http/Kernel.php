@@ -97,7 +97,7 @@ class Kernel extends HttpKernel
 
         $this->router->replaceMiddleware(
             $this->routeMiddleware + $this->router->getMiddleware(),
-            $this->middlewareGroups + $this->router->getMiddlewareGroups()
+            array_merge_recursive($this->middlewareGroups, $this->router->getMiddlewareGroups())
         );
 
         return parent::dispatchToRouter();

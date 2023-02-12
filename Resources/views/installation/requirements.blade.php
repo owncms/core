@@ -1,4 +1,4 @@
-@extends('core::layouts.Installation')
+@extends('core::layouts.installation')
 @section('main')
     <div class="installation-box">
         <span class="title">@lang('core::installation.general_info')</span>
@@ -22,7 +22,10 @@
                             <div class="col-info">
                                 <span>{{ $extension }}</span>
                                 <span class="status @if($status) status-success @else status-error @endif">@if($status)
-                                        &#10003; @else &#120; @endif</span>
+                                        &#10003;
+                                    @else
+                                        &#120;
+                                    @endif</span>
                             </div>
                         @endforeach
                     </div>
@@ -36,7 +39,10 @@
                 <div class="col-info">
                     <span>{{ $permission }}</span>
                     <span class="status @if($status) status-success @else status-error @endif">@if($status)
-                            &#10003; @else &#120; @endif</span>
+                            &#10003;
+                        @else
+                            &#120;
+                        @endif</span>
                 </div>
             @endforeach
         </div>

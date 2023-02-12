@@ -13,6 +13,8 @@ use Modules\Core\src\Software\ISoftware;
 use Modules\Core\src\Software\Software;
 use Modules\Core\Http\Controllers\Backend\InstallationController;
 use Modules\Core\Providers\Base\ModuleServiceProvider;
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Routing\Router;
 
 class CoreServiceProvider extends ModuleServiceProvider
 {
@@ -26,6 +28,19 @@ class CoreServiceProvider extends ModuleServiceProvider
      */
     public function boot()
     {
+        $router = $this->app['router'];
+        if (!(new Installation)->checkInstallationStatus() && app('application')->isFrontend()) {
+            $router->pushMiddlewareToGroup('front', \Modules\Core\Http\Middleware\Installation::class);
+            $ipInstallation = getenv('IP_Installation');
+            //todo
+            if (!$ipInstallation) {
+//                throw new \Exception('Make sure you have set the .env key: IP_Installation key');
+            }
+            if ($ipInstallation != request()->ip()) {
+//                return abort(403);
+            }
+            $this->loadInstallationRoutes();
+        }
         parent::boot();
 
         $this->commands(
@@ -44,22 +59,9 @@ class CoreServiceProvider extends ModuleServiceProvider
     {
         $loader = AliasLoader::getInstance();
         $this->app->register(RouteServiceProvider::class);
-        $router = $this->app['router'];
         $this->app->make(Application::class);
         $this->app->bind('application', Application::class);
         $loader->alias('Application', \Modules\Core\Facades\Application::class);
-        if (!(new Installation)->checkInstallationStatus() && app('application')->isFrontend()) {
-            $router->pushMiddlewareToGroup('web', \Modules\Core\Http\Middleware\Installation::class);
-            $ipInstallation = getenv('IP_Installation');
-            //todo
-            if (!$ipInstallation) {
-//                throw new \Exception('Make sure you have set the .env key: IP_Installation key');
-            }
-            if ($ipInstallation != request()->ip()) {
-//                return abort(403);
-            }
-            $this->loadInstallationRoutes();
-        }
 
         $this->app->bind(ISoftware::class, Software::class);
         $this->app->singleton('CoreSoftware', function () {
@@ -96,17 +98,26 @@ class CoreServiceProvider extends ModuleServiceProvider
         );
     }
 
+    /**
+     * @return void
+     */
     private function loadInstallationRoutes()
     {
-        Route::group(['prefix' => 'installation', 'as' => 'installation', 'middleware' => ['web']], function () {
-            Route::get('languages', [InstallationController::class, 'getLanguages'])->name('.languages');
-            Route::post('post-languages', [InstallationController::class, 'postLanguages'])->name('.post-languages');
+        Route::group(['prefix' => 'installation', 'as' => 'installation.', 'middleware' => ['web']], function () {
+            Route::get('languages', [InstallationController::class, 'getLanguages'])
+                ->name('languages');
+            Route::post('post-languages', [InstallationController::class, 'postLanguages'])
+                ->name('post-languages');
 
-            Route::get('start', [InstallationController::class, 'start'])->name('.start');
+            Route::get('start', [InstallationController::class, 'start'])
+                ->name('start');
 
-            Route::get('requirements', [InstallationController::class, 'getRequirements'])->name('.requirements');
-            Route::get('settings', [InstallationController::class, 'getSettings'])->name('.settings');
-            Route::post('post-settings', [InstallationController::class, 'postSettings'])->name('.post-settings');
+            Route::get('requirements', [InstallationController::class, 'getRequirements'])
+                ->name('requirements');
+            Route::get('settings', [InstallationController::class, 'getSettings'])
+                ->name('settings');
+            Route::post('post-settings', [InstallationController::class, 'postSettings'])
+                ->name('post-settings');
         });
     }
 }

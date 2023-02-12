@@ -16,6 +16,7 @@ class Application
     private $prefixAdmin;
     const VERSION = 0.1;
     const AUTHOR = 'Damian Białkowski';
+    const APP_NAME = 'OwnCMS';
 
     /**
      * Application constructor.
@@ -131,6 +132,18 @@ class Application
         return self::AUTHOR;
     }
 
+    /**
+     * Get App name
+     * @return string
+     */
+    public static function getAppName(): string
+    {
+        return self::APP_NAME;
+    }
+
+    /**
+     * @return string
+     */
     public function getPrefixAdmin(): string
     {
         return $this->prefixAdmin;

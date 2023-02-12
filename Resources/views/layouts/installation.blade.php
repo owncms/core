@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="canonical" href="{{url()->current()}}"/>
 
-    <title>Installation - {{ request()->route()->getController()->title }} - DCms</title>
+    <title>Installation - {{ request()->route()->getController()->title }} - {{ cms_name() }}</title>
 
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
           rel="stylesheet">

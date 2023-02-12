@@ -32,11 +32,11 @@ class RouteServiceProvider extends BaseRouteServiceProvider
      */
     public function map()
     {
-//        if ($this->routeType == 'backend') {
+        if ($this->routeType == 'backend') {
             $this->mapWebRoutes();
-//        } else {
+        } else {
             $this->mapFrontRoutes();
-//        }
+        }
         $this->mapApiRoutes();
     }
 

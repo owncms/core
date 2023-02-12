@@ -120,6 +120,13 @@ if (!function_exists('cms_author')) {
     }
 }
 
+if (!function_exists('cms_name')) {
+    function cms_name()
+    {
+        return \Application::getAppName();
+    }
+}
+
 if (!function_exists('build_crud_route')) {
     function build_crud_route($method, $id = null): string
     {

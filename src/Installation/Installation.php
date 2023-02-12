@@ -3,17 +3,28 @@
 namespace Modules\Core\src\Installation;
 
 use File;
+use Illuminate\Support\Facades\Config;
 
 class Installation
 {
+    /**
+     * @var string
+     */
+    protected string $file = 'owncms_installation.txt';
     //1. Composer update
     //2. plik .env kopia - ustawianie domyslnych danych
 
+    /**
+     * @return bool
+     */
     public function checkInstallationStatus(): bool
     {
-        return file_exists(storage_path('framework/dcms_installation.txt'));
+        return file_exists(storage_path('framework/' . $this->file));
     }
 
+    /**
+     * @return void
+     */
     public function createDefaultEnvFile()
     {
         if (!file_exists(base_path('.env'))) {
@@ -30,11 +41,14 @@ class Installation
         //todo
     }
 
+    /**
+     * @return array
+     */
     public function checkRequirements(): array
     {
         $requirementsConfig = [
-            'php' => config('core.requirements.php'),
-            'apache' => config('core.requirements.apache'),
+            'php' => Config::get('core.requirements.php'),
+            'apache' => Config::get('core.requirements.apache'),
         ];
         $software = resolve('CoreSoftware');
         $requirements = [];
@@ -43,17 +57,28 @@ class Installation
                 $extensions = [$extensions];
             }
             foreach ($extensions as $extension) {
-                $requirements[$type][$extension] = $type == 'php' ?
-                    $software->isPhpExtensionLoaded($extension) :
-                    $software->isApacheModuleEnabled($extension);
+                switch ($type) {
+                    case 'php':
+                        $result = $software->isPhpExtensionLoaded($extension);
+                        break;
+                    case 'apache':
+                        $result = $software->isApacheModuleEnabled($extension);
+                        break;
+                    default:
+                        continue;
+                }
+                $requirements[$type][$extension] = $result;
             }
         }
         return $requirements;
     }
 
+    /**
+     * @return array
+     */
     public function checkPermissions(): array
     {
-        $permissionsConfig = config('core.requirements.permissions');
+        $permissionsConfig = Config::get('installation.requirements.permissions');
         $requirements = [];
         foreach ($permissionsConfig as $key => $path) {
             $requirements[$key] = is_writable($path);

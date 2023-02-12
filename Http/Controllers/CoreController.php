@@ -60,7 +60,7 @@ abstract class CoreController extends BaseController
     public function index(): object
     {
         if (!Bouncer::can('index', $this->model)) {
-            return abort(403);
+            abort(403);
         }
         $entity = new $this->model;
         $data = (new Presenter($entity, $this->searchableColumns))->withFilters()->getData();
@@ -74,7 +74,7 @@ abstract class CoreController extends BaseController
     public function create(): object
     {
         if (!Bouncer::can('create', $this->model)) {
-            return abort(403);
+            abort(403);
         }
         $form = $this->form($this->form, [
             'method' => 'POST',
@@ -93,7 +93,7 @@ abstract class CoreController extends BaseController
     public function store(Request $request)
     {
         if (!Bouncer::can('create', $this->model)) {
-            return abort(403);
+            abort(403);
         }
         if (isset($this->request)) {
             $this->validateForm($request, new $this->request);
@@ -110,7 +110,7 @@ abstract class CoreController extends BaseController
     public function show($id): object
     {
         if (!Bouncer::can('show', $this->model)) {
-            return abort(403);
+            abort(403);
         }
         $item = (new $this->model)->withTrashed()->findOrFail($id);
 
@@ -134,7 +134,7 @@ abstract class CoreController extends BaseController
     public function edit($id): object
     {
         if (!Bouncer::can('edit', $this->model)) {
-            return abort(403);
+            abort(403);
         }
         $item = $this->model::withTrashed()->findOrFail($id);
 
@@ -151,10 +151,15 @@ abstract class CoreController extends BaseController
         return $this->view($this->baseView . '.edit', compact(['item', 'form', 'entity']));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
+     */
     public function update(Request $request, $id)
     {
         if (!Bouncer::can('edit', $this->model)) {
-            return abort(403);
+            abort(403);
         }
         if (isset($this->request)) {
             $this->validateForm($request, new $this->request, $id);

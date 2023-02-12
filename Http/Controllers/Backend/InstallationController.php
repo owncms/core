@@ -9,16 +9,32 @@ use Modules\Core\src\Software\Software;
 
 class InstallationController extends Controller
 {
-    private object $software;
-    private object $installation;
+    /**
+     * @var Software
+     */
+    private Software $software;
+    /**
+     * @var Installation
+     */
+    private Installation $installation;
+    /**
+     * @var string
+     */
     public string $title;
 
+    /**
+     * @param Software $software
+     * @param Installation $installation
+     */
     public function __construct(Software $software, Installation $installation)
     {
         $this->software = $software;
         $this->installation = $installation;
     }
 
+    /**
+     * @return object
+     */
     public function getLanguages(): object
     {
         $this->title = trans('core::installation.steps.title.languages');
@@ -37,13 +53,20 @@ class InstallationController extends Controller
         return redirect(route('installation.start'));
     }
 
-    public function start(): object
+    /**
+     * @return Factory|View
+     */
+    public function start()
     {
         $this->title = trans('core::installation.steps.title.start');
         return view('core::installation.start');
     }
 
-    public function getRequirements(Request $request): object
+    /**
+     * @param Request $request
+     * @return Factory|View
+     */
+    public function getRequirements(Request $request)
     {
         $this->title = trans('core::installation.steps.title.requirements');
         $requirements['general'] = $this->software->all();
@@ -53,7 +76,10 @@ class InstallationController extends Controller
         return view('core::installation.requirements', compact('requirements'));
     }
 
-    public function getSettings(): object
+    /**
+     * @return Factory|View
+     */
+    public function getSettings()
     {
         $this->title = trans('core::installation.steps.title.settings');
         return view('core::installation.settings');

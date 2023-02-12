@@ -61,7 +61,10 @@ class Software implements ISoftware
      */
     public function getApacheModules(): array
     {
-        return apache_get_modules();
+        if (function_exists('apache_get_modules')) {
+            return apache_get_modules();
+        }
+        return [];
     }
 
     /**

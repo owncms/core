@@ -1,4 +1,4 @@
-@extends('core::layouts.Installation')
+@extends('core::layouts.installation')
 @section('main')
     <div class="installation-box">
         @lang('core::installation.start')
