@@ -22,7 +22,7 @@
         "cviebrock/eloquent-sluggable": "^10.0",
         "silber/bouncer": "dev-master",
         "laravelcollective/html": "^6.2",
-        "spatie/laravel-translatable": "^5.0"
+        "spatie/laravel-translatable": "^6.0"
     },
     "autoload": {
         "psr-4": {
