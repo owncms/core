@@ -1,22 +1,19 @@
 {
     "name": "Core",
     "alias": "core",
-    "description": "THe core module with the base override classes and logic",
-    "keywords": [],
+    "description": "The core module with the base override classes and logic",
+    "version" : "0.0.1",
     "priority": 0,
     "providers": [
-        "Modules\\Core\\Providers\\CoreServiceProvider",
-        "Modules\\Core\\Providers\\BladeServiceProvider",
-        "Modules\\Core\\src\\FormBuilder\\FormBuilderServiceProvider",
-        "Barryvdh\\Debugbar\\ServiceProvider"
+        "Modules\\Core\\App\\Providers\\CoreServiceProvider",
+        "Modules\\Core\\App\\Providers\\RouteServiceProvider",
+        "Modules\\Core\\App\\Providers\\BladeServiceProvider"
     ],
     "aliases": {
-        "FormBuilder": "Modules\\Core\\src\\FormBuilder\\Facades\\FormBuilder",
         "Debugbar": "Barryvdh\\Debugbar\\Facade"
     },
     "files": [
-        "helpers.php"
+        "App/helpers.php"
     ],
-    "requires": [],
-    "version" : "0.0.1"
+    "requires": []
 }

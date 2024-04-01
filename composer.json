@@ -12,7 +12,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\Core\\Providers\\CoreServiceProvider"
+                "Modules\\Core\\App\\Providers\\CoreServiceProvider"
             ],
             "aliases": {
             }
@@ -27,10 +27,10 @@
     "autoload": {
         "psr-4": {
             "Modules\\Core\\": "",
-            "src\\FormBuilder\\": "src\\FormBuilder\\"
+            "Modules\\Core\\App\\": "app/"
         },
         "files": [
-            "src/FormBuilder/Helpers/helpers.php"
+
         ]
     }
 }
